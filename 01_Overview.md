@@ -3,7 +3,7 @@
 - **Logging** là một công cụ đơn giản và mạnh mẽ, ghi lại toàn bộ những hoạt động của hệ thống.
 - Nhờ có **logging**, ta có thể tra cứu lại trạng thái của hệ thống trong quá khứ, những code nào đã được chạy, từ đó tìm ra lỗi và fix dễ dàng hơn.
 - Tuy nhiên việc tập chung và phân tích log của hệ thống là vấn đề khó khăn đối với mỗi doanh nghiệp. **ELK Stack** một công cụ mạnh mẽ dùng để quản lý và phân tích log tập trung.
-## **2) Tổng quan về ELK Stack**
+## **2) Tổng quan về ELK Stack** <img src=https://i.imgur.com/9UupTMT.png width=20% align=right>
 - **ELK Stack** là tập hợp 3 phần mềm đi chung với nhau, phục vụ cho công việc logging. 3 phần mềm này lần lượt là :
     - **Elasticsearch :** Cơ sở dữ liệu để lưu trữ, tìm kiếm và query log.
     - **Logstash :** Tiếp nhận log từ nhiều nguồn, sau đó xử lý log và ghi dữ liệu vào **Elasticsearch**.
