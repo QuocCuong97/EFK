@@ -34,6 +34,14 @@
 ## **4) Các trường hợp sử dụng ELK stack**
 - Với các hệ thống hoặc ứng dụng nhỏ, ta không cần sử dụng **ELK stack** làm gì, cứ dùng thư viện ghi log đi kèm với ngôn ngữ, sau đó ghi log ra file rồi đọc bình thường.
 - Tuy nhiên, với những hệ thống lớn nhiều người dùng, có nhiều service phân tán (microservice), có nhiều server chạy cùng lúc… thì việc ghi log xuống file không còn hiệu quả nữa. Lúc này số lượng máy chủ trên hệ thống là lớn và nhiều do đó chúng ta không thể dùng cách thủ công là remote vào từng máy rồi đọc log của từng server được, lúc này **ELK stack** sẽ giải quyết vấn đề đó. **ELK stack** sẽ ghi log tập chung vào một chỗ khiến chúng ta có thể dễ dàng quản lý log trên toàn hệ thống.
+- Việc monitor log real-time từ nhiều nguồn khác nhau giúp cho **Elastic stack** được sử dụng trong nhiều trường hợp :
+    - ***Security monitoring and alerting***: A server monitoring and alerting system is an important security application for the ELK stack. Checking for unusual request or detecting server attacks with a real-time alert system can help mitigate damages as soon as they appear.
+    - ***E-commerce solutions*** : Full-text searches, indexing, aggregations and fast responses creates a better user experience. Visually monitoring search trends and behaviors helps enhance trend analysis.
+    - ***Web scraping*** : The ability to collect, index and search through unstructured data from varying sources makes it simple to gather and visualize web scraped information.
+    - ***Traffic monitoring*** : Monitoring website traffic data helps indicate that one server is overloaded. Implement a load-balancing application (like Nginx) to shift traffic to other servers.
+    - ***Error detection*** : If you’re deploying a new application, you can monitor errors for that application. These can help quickly identify areas to fix bugs or improve application design.
+
+
 ## **5) Vì sao nên sử dụng ELK stack?**
 - ***Đọc log từ nhiều nguồn :*** **Logstash** có thể đọc được log từ rất nhiều nguồn, từ log file cho đến log database cho đến UDP hay REST request.
 - ***Dễ tích hợp :*** Dù bạn có dùng Nginx hay Apache, dùng MSSQL, MongoDB hay Redis, Logstash đều có thể đọc hiểu và xử lý log của bạn nên việc tích hợp rất dễ dàng.
