@@ -1,5 +1,4 @@
 # Cài đặt ELK Stack
-## **Mô hình**
 ## **Các bước cài đặt**
 ### **Cài đặt ElasticSearch**
 - **B1 :** Cài đặt **Java OpenJDK** :
@@ -22,23 +21,19 @@
     autorefresh=1
     type=rpm-md
     EOF
-    ```
-- **B4 :** Update các repo :
-    ```
-    # yum repolist
     ```   
-- **B5 :** Cài đặt **ElasticSearch** :
+- **B4 :** Cài đặt **ElasticSearch** :
     ```
     # yum install elasticsearch -y
     ```
-- **B6 :**  (tùy chọn) Cấu hình các JVM options như memory limit trong file `jvm.options` :
+- **B5 :**  (tùy chọn) Cấu hình các JVM options như memory limit trong file `jvm.options` :
     ```
     # vi /etc/elasticsearch/jvm.options
     ```
     - Chỉnh sửa các thông số `Xms` và `Xmx` theo thứ tự là initial/maximum size của tổng lượng heap memory :
         <img src=https://i.imgur.com/H0Lu85F.png>
 
-- **B7 :** Chỉnh sửa các tham số `network.host`, `http.port`, `discovery.seed_hosts` trong file `elasticsearch.yml` :
+- **B6 :** Chỉnh sửa các tham số `network.host`, `http.port`, `discovery.seed_hosts` trong file `elasticsearch.yml` :
     ```
     # vi /etc/elasticsearch/elasticsearch.yml
     ```
@@ -52,12 +47,12 @@
         ```
     <img src=https://i.imgur.com/AV1HITv.png>
 
-- **B9 :** Khởi động **ElasticSearch** và cho phép dịch vụ khởi động cùng hệ thống :
+- **B7 :** Khởi động **ElasticSearch** và cho phép dịch vụ khởi động cùng hệ thống :
     ```
     # systemctl start elasticsearch
     # systemctl enable elasticsearch
     ```
-- **B10 :** Khởi tạo password cho các user có sẵn ([tham khảo thêm](https://www.elastic.co/guide/en/elasticsearch/reference/7.16/security-minimal-setup.html)) :
+- **B8 :** Khởi tạo password cho các user có sẵn ([tham khảo thêm](https://www.elastic.co/guide/en/elasticsearch/reference/7.16/security-minimal-setup.html)) :
     ```
     # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
     ```
@@ -79,20 +74,16 @@
     type=rpm-md
     EOF
     ```
-- **B2 :** Update các repo :
-    ```
-    # yum repolist
-    ```
-- **B3 :** Cài đặt **Logtash** :
+- **B2 :** Cài đặt **Logtash** :
     ```
     # yum install logstash -y
     ```
-- **B4 :** Khởi động **ElasticSearch** và cho phép dịch vụ khởi động cùng hệ thống :
+- **B3 :** Khởi động **ElasticSearch** và cho phép dịch vụ khởi động cùng hệ thống :
     ```
     # systemctl start logstash
     # systemctl enable logstash
     ```
-- **B5 :** Kiểm tra phiên bản `logtash` vừa cài đặt :
+- **B4 :** Kiểm tra phiên bản `logtash` vừa cài đặt :
     ```
     # /usr/share/logstash/bin/logstash --version
     ```
@@ -112,15 +103,11 @@
     type=rpm-md
     EOF
     ```
-- **B2 :** Update các repo :
-    ```
-    # yum repolist
-    ```
-- **B3 :** Cài đặt **Kibana** :
+- **B2 :** Cài đặt **Kibana** :
     ```
     # yum install kibana -y
     ```
-- **B4 :** Chỉnh sửa file cấu hình `/etc/kibana/kibana.yml` :
+- **B3 :** Chỉnh sửa file cấu hình `/etc/kibana/kibana.yml` :
     ```
     # vi /etc/kibana/kibana.yml
     ```
@@ -128,40 +115,40 @@
 
     <img src=https://i.imgur.com/WDI8LRy.png>
 
-- **B5 :** Cấu hình `firewalld` cho phép port `5601` :
+- **B4 :** Cấu hình `firewalld` cho phép port `5601` :
     ```
     # firewall-cmd --zone=public --permanent --add-port=5601/tcp
     # firewall-cmd --reload
     ```
-- **B6 :** Khởi động **Kibana** và cho phép dịch vụ khởi động cùng hệ thống :
+- **B5 :** Khởi động **Kibana** và cho phép dịch vụ khởi động cùng hệ thống :
     ```
     # systemctl start kibana
     # systemctl enable kibana
     ```
-- **B7 :** Kiểm tra phiên bản `kibana` vừa cài đặt :
+- **B6 :** Kiểm tra phiên bản `kibana` vừa cài đặt :
     ```
     # /usr/share/kibana/bin/kibana --version --allow-root
     ```
     <img src=https://i.imgur.com/JYMSAmA.png>
 
-- **B8 :** Tạo Kibana keystore :
+- **B7 :** Tạo Kibana keystore :
     ```
     # /usr/share/kibana/bin/kibana-keystore create
     ```
-- **B9 :** Nhập mật khẩu của user `kibana_system` vào Kibana keystore :
+- **B8 :** Nhập mật khẩu của user `kibana_system` vào Kibana keystore :
     ```
     # /usr/share/kibana/bin/kibana-keystore add elasticsearch.password
     ```
-- **B10 :** Khởi động lại dịch vụ `kibana` :
+- **B9 :** Khởi động lại dịch vụ `kibana` :
     ```
     # systemctl restart kibana
     ```
-- **B11 :** Truy cập **Kibana** từ trình duyệt client, đăng nhập bằng user `elastic` và password được gen tự động trước đó :
+- **B10 :** Truy cập **Kibana** từ trình duyệt client, đăng nhập bằng user `elastic` và password được gen tự động trước đó :
     ```
     http://192.168.5.10:5601
     ```
     <img src=https://i.imgur.com/awGR8h0.png>
 
-- **B12 :** Giao diện quản trị của **Kibana** :
+- **B11 :** Giao diện quản trị của **Kibana** :
 
     <img src=https://i.imgur.com/4VHmPcF.png>
